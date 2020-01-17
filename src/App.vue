@@ -4,6 +4,7 @@
 
     <div class="component-container">
       <category-dropdown :categories="recipeCategories"/>
+      <recipe-list :recipes="recipesFromCategory"/>
     </div>
   </div>
 </template>
@@ -11,7 +12,8 @@
 <script>
 import {eventBus} from './main.js';
 
-import MealCategoryDropdown from './components/MealCategoryDropdown.vue'
+import RecipeCategoryDropdown from './components/RecipeCategoryDropdown.vue'
+import RecipeList from './components/RecipeList.vue'
 
 export default {
   name: 'app',
@@ -27,7 +29,7 @@ export default {
       let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${this.searchCategoryTerm}`
       fetch(categoryUrl)
         .then(req => req.json())
-        .then(data => console.log(data.meals))
+        .then(recipeArray => this.recipesFromCategory = recipeArray.meals)
     }
   },
   mounted(){
@@ -47,7 +49,8 @@ export default {
     });
   },
   components: {
-    "category-dropdown": MealCategoryDropdown
+    "category-dropdown": RecipeCategoryDropdown,
+    "recipe-list": RecipeList
   }
 }
 </script>
