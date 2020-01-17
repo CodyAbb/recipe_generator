@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Recipe Fetcher</h1>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data() {
+    return{
+      recipeCategories: []
+    }
+  },
+  mounted(){
+    fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
+      .then(req => req.json())
+      .then(data => this.recipeCategories.push(data.categories))
   }
 }
 </script>
