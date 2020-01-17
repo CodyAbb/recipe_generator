@@ -17,7 +17,17 @@ export default {
   name: 'app',
   data() {
     return{
-      recipeCategories: []
+      recipeCategories: [],
+      searchCategoryTerm: "Beef",
+      recipesFromCategory: []
+    }
+  },
+  methods: {
+    fetchRecipes(){
+      let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${this.searchCategoryTerm}`
+      fetch(categoryUrl)
+        .then(req => req.json())
+        .then(data => console.log(data.meals))
     }
   },
   mounted(){
@@ -26,7 +36,15 @@ export default {
       .then(data => {
         const recipeCategories = data.categories.map(category => category.strCategory)
         this.recipeCategories = recipeCategories
-      })
+      });
+
+      this.fetchRecipes();
+
+
+
+    eventBus.$on('category-selected', (category) => {
+      this.searchCategoryTerm = category
+    });
   },
   components: {
     "category-dropdown": MealCategoryDropdown
