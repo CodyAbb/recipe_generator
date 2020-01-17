@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <h1>Recipe Fetcher</h1>
+
+    <div class="component-container">
+      <category-dropdown :categories="recipeCategories"/>
+    </div>
   </div>
 </template>
 
 <script>
+import {eventBus} from './main.js';
 
+import MealCategoryDropdown from './components/MealCategoryDropdown.vue'
 
 export default {
   name: 'app',
@@ -17,7 +23,13 @@ export default {
   mounted(){
     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(req => req.json())
-      .then(data => this.recipeCategories.push(data.categories))
+      .then(data => {
+        const recipeCategories = data.categories.map(category => category.strCategory)
+        this.recipeCategories = recipeCategories
+      })
+  },
+  components: {
+    "category-dropdown": MealCategoryDropdown
   }
 }
 </script>
