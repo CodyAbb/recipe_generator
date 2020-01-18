@@ -5,6 +5,7 @@
     <div class="component-container">
       <category-dropdown :categories="recipeCategories"/>
       <recipe-list :recipes="recipesFromCategory"/>
+      <recipe-detail :recipe="renderedRecipe"/>
     </div>
   </div>
 </template>
@@ -14,6 +15,7 @@ import {eventBus} from './main.js';
 
 import RecipeCategoryDropdown from './components/RecipeCategoryDropdown.vue'
 import RecipeList from './components/RecipeList.vue'
+import RecipeDetail from './components/RecipeDetail.vue'
 
 export default {
   name: 'app',
@@ -21,11 +23,14 @@ export default {
     return{
       recipeCategories: [],
       searchCategoryTerm: "Beef",
-      recipesFromCategory: []
+      recipesFromCategory: [],
+      selectedRecipeId: null
     }
   },
   methods: {
     fetchRecipes(){
+      // let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef`
+
       let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${this.searchCategoryTerm}`
       fetch(categoryUrl)
         .then(req => req.json())
@@ -33,6 +38,8 @@ export default {
     }
   },
   mounted(){
+
+
     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(req => req.json())
       .then(data => {
@@ -40,28 +47,32 @@ export default {
         this.recipeCategories = recipeCategories
       });
 
-      this.fetchRecipes();
+        this.fetchRecipes();
 
 
 
     eventBus.$on('category-selected', (category) => {
       this.searchCategoryTerm = category
     });
+
+    eventBus.$on('recipe-selected', (recipeId) => {
+     this.selectedRecipeId = recipeId
+   });
   },
   components: {
     "category-dropdown": RecipeCategoryDropdown,
-    "recipe-list": RecipeList
+    "recipe-list": RecipeList,
+    "recipe-detail": RecipeDetail
+  },
+  computed: {
+    renderedRecipe: function() {
+      return this.recipesFromCategory.find(recipe => recipe.idMeal === this.selectedRecipeId)
+    }
   }
+
 }
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
