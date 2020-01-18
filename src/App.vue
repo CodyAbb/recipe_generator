@@ -5,7 +5,7 @@
     <div class="component-container">
       <category-dropdown :categories="recipeCategories"/>
       <recipe-list :recipes="recipesFromCategory"/>
-      <recipe-detail :recipe="renderedRecipe"/>
+      <recipe-detail :recipe="selectedRecipe"/>
     </div>
   </div>
 </template>
@@ -24,7 +24,8 @@ export default {
       recipeCategories: [],
       searchCategoryTerm: "Beef",
       recipesFromCategory: [],
-      selectedRecipeId: null
+      selectedRecipeId: null,
+      selectedRecipe: null
     }
   },
   methods: {
@@ -35,6 +36,14 @@ export default {
       fetch(categoryUrl)
         .then(req => req.json())
         .then(recipeArray => this.recipesFromCategory = recipeArray.meals)
+    },
+    fetchChosenRecipe(){
+      let recipeUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${this.selectedRecipeId}`
+      fetch(recipeUrl)
+        .then(req => req.json())
+        .then(data=> data.meals[0])
+        .then(recipe => this.selectedRecipe = recipe)
+        // .then(recipe => this.selectedRecipe = recipe.meals)
     }
   },
   mounted(){
@@ -48,6 +57,7 @@ export default {
       });
 
         this.fetchRecipes();
+        this.fetchChosenRecipe();
 
 
 
@@ -74,5 +84,12 @@ export default {
 </script>
 
 <style>
-
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
 </style>
