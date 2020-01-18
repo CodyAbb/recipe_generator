@@ -22,12 +22,21 @@ export default {
   data() {
     return{
       recipeCategories: [],
-      searchCategoryTerm: "Beef",
+      searchCategoryTerm: "",
       recipesFromCategory: [],
       selectedRecipeId: null,
       selectedRecipe: null
     }
   },
+  watch: {
+   // whenever question changes, this function will run
+   searchCategoryTerm: function () {
+     this.fetchRecipes();
+   },
+   selectedRecipeId: function(){
+     this.fetchChosenRecipe();
+   }
+ },
   methods: {
     fetchRecipes(){
       // let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef`
@@ -56,8 +65,6 @@ export default {
         this.recipeCategories = recipeCategories
       });
 
-        this.fetchRecipes();
-        this.fetchChosenRecipe();
 
 
 

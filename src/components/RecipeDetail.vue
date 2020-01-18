@@ -88,6 +88,7 @@
       </tr>
     </table>
     <p>{{ recipe.strInstructions }}</p>
+    <p>Original Source: {{recipe.strSource}}</p>
   </article>
 </template>
 
