@@ -1,4 +1,5 @@
-# recipe_generator
+# Recipe Generator
+### Simple vue application that retrieves information from the MealDb API and renders a users chosen recipe in a simple layout
 
 ## Project setup
 ```
