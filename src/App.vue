@@ -101,7 +101,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #586BA4;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 h1 {
@@ -126,6 +126,7 @@ h1 {
 #recipe-info {
   grid-area: article;
 }
+
 
 .component-container {
   display: grid;

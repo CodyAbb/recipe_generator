@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="recipes-container">
     <ul>
-      <recipe-list-item id="pointer-hover" v-for="recipe in recipes" :recipe="recipe"></recipe-list-item>
+      <recipe-list-item id="pointer-hover"v-for="recipe in recipes" :recipe="recipe"></recipe-list-item>
     </ul>
   </div>
 </template>

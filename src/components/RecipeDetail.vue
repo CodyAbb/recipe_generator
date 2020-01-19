@@ -87,7 +87,7 @@
         <td>{{recipe.strMeasure20}}</td>
       </tr>
     </table>
-    <p>{{ recipe.strInstructions }}</p>
+    <p id="instructions">{{ recipe.strInstructions }}</p>
     <p>Original Source: <a :href="recipe.strSource">{{recipe.strSource}}</a></p>
   </article>
 </template>
@@ -100,6 +100,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+h3{
+  text-decoration: underline;
+}
+
 table:empty {
  display: none;
 }
@@ -110,5 +114,9 @@ img{
 
 td{
 padding-left: 10px;
+}
+
+#instructions{
+  padding-right: 30px;
 }
 </style>
