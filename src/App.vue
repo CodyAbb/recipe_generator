@@ -44,8 +44,6 @@ export default {
  },
   methods: {
     fetchRecipes(){
-      // let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef`
-
       let categoryUrl = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${this.searchCategoryTerm}`
       fetch(categoryUrl)
         .then(req => req.json())
@@ -57,21 +55,15 @@ export default {
         .then(req => req.json())
         .then(data=> data.meals[0])
         .then(recipe => this.selectedRecipe = recipe)
-        // .then(recipe => this.selectedRecipe = recipe.meals)
     }
   },
   mounted(){
-
-
     fetch('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(req => req.json())
       .then(data => {
         const recipeCategories = data.categories.map(category => category.strCategory)
         this.recipeCategories = recipeCategories
       });
-
-
-
 
     eventBus.$on('category-selected', (category) => {
       this.searchCategoryTerm = category
@@ -104,29 +96,27 @@ export default {
   margin-top: 40px;
 }
 
-h1 {
-
-}
-
 .header-container {
   grid-area: header;
   justify-self: start;
   font-weight: 700;
   font-size: 2em;
 }
+
 #recipe-category-list {
   grid-area: filter;
   justify-self: left;
   align-self: center;
 }
+
 #recipe-list {
   grid-area: list;
   justify-self: left;
 }
+
 #recipe-info {
   grid-area: article;
 }
-
 
 .component-container {
   display: grid;
