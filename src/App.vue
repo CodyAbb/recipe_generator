@@ -131,6 +131,7 @@ h1 {
 .component-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
   grid-template-rows: auto;
   grid-template-areas:
     "header header filter"
