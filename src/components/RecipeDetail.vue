@@ -88,7 +88,7 @@
       </tr>
     </table>
     <p>{{ recipe.strInstructions }}</p>
-    <p>Original Source: {{recipe.strSource}}</p>
+    <p>Original Source: <a :href="recipe.strSource">{{recipe.strSource}}</a></p>
   </article>
 </template>
 
@@ -106,5 +106,9 @@ table:empty {
 
 img{
   width: 500px;
+}
+
+td{
+padding-left: 10px;
 }
 </style>
