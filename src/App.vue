@@ -1,11 +1,16 @@
 <template>
   <div id="app">
-    <h1>Recipe Fetcher</h1>
+
 
     <div class="component-container">
-      <category-dropdown :categories="recipeCategories"/>
-      <recipe-list :recipes="recipesFromCategory"/>
-      <recipe-detail :recipe="selectedRecipe"/>
+      <div class="header-container">
+        <h1 id="title" class="title">Recipe Fetcher</h1>
+        <h3>Have a look for some culinary inspiration...</h3>
+      </div>
+
+      <category-dropdown id="recipe-category-list" :categories="recipeCategories"/>
+      <recipe-list id="recipe-list" :recipes="recipesFromCategory"/>
+      <recipe-detail id="recipe-info" :recipe="selectedRecipe"/>
     </div>
   </div>
 </template>
@@ -92,11 +97,42 @@ export default {
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Merriweather', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+h1 {
+
+}
+
+.header-container {
+  grid-area: header;
+  justify-self: start;
+  font-weight: 700;
+  font-size: 2em;
+}
+#recipe-category-list {
+  grid-area: filter;
+  justify-self: left;
+  align-self: center;
+}
+#recipe-list {
+  grid-area: list;
+  justify-self: left;
+}
+#recipe-info {
+  grid-area: article;
+}
+
+.component-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "header header filter"
+    "list article article";
 }
 </style>

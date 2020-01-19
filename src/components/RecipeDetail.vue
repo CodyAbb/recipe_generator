@@ -103,4 +103,8 @@ export default {
 table:empty {
  display: none;
 }
+
+img{
+  width: 500px;
+}
 </style>

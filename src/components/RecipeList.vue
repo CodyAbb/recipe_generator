@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+recipe-list-item .pointer{
+cursor: pointer;
+}
 </style>

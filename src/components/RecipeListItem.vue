@@ -17,7 +17,8 @@ methods: {
 </script>
 
 <style lang="css" scoped>
-li .pointer {
-  cursor: pointer;
+li{
+  list-style: none;
+  margin-bottom: 20px;
 }
 </style>
